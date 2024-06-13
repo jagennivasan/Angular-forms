@@ -1,18 +1,13 @@
-<p class="text-xl text-center">Template-driven-form</p>
+<p class="text-xl text-center">Reactive-form</p>
 
-<form
-  action=""
-  class="max-w-sm mx-auto"
-  #contactForm="ngForm"
-  (submit)="onSubmit(contactForm)"
->
+<form action="" class="max-w-sm mx-auto" [formGroup]="contactForms" (submit)="onSubmit()">
   <!-- First Name -->
   <div class="mb-5">
     <label for="First name" class="block mb-2 text-sm font-medium text-gray-900"
       >First Name:</label
     >
     <input
-      [(ngModel)]="contact.firstName"
+    formControlName="firstName"
       type="text"
       name="firstName"
       placeholder="First name"
@@ -25,7 +20,7 @@
       >Last Name:</label
     >
     <input
-      [(ngModel)]="contact.lastName"
+    formControlName="lastName"
       type="text"
       name="lastName"
       placeholder="Last name"
@@ -38,7 +33,7 @@
       >Email:</label
     >
     <input
-      [(ngModel)]="contact.email"
+    formControlName="email"
       type="email"
       name="email"
       placeholder="Email"
@@ -50,59 +45,54 @@
     <label for="Gender" class="block mb-2 text-sm font-medium text-gray-900"
       >Gender:</label
     >
-    <input type="radio" value="male" name="gender" name="gender" [(ngModel)]="contact.gender" />male
-    <input
-      type="radio"
-      value="female"
-      name="email"
-      name="gender"
-      [(ngModel)]="contact.gender"
-    />female
+    <input type="radio" value="male" name="gender" name="gender" formControlName="gender"/>male
+    <input type="radio" value="female" name="email" name="gender" formControlName="gender"/>female
   </div>
   <!--Check box for maritel status -->
   <div>
-    <label for="isMaried" class="text-sm font-medium text-gray-900"
+    <label for="isMarried" class="text-sm font-medium text-gray-900"
       >Married:</label
     >
-    <input type="checkbox" name="isMarried" [(ngModel)]="contact.isMarried" />
+    <input type="checkbox" name="isMarried" formControlName="isMarried"/>
   </div>
   <!--Country -->
   <div class="mb-5">
     <label for="country">country:</label>
-    <select name="countrySelection" id="" [(ngModel)]="contact.country">
+    <select name="countrySelection" id="" formControlName="country">
       <option value="" selected="">Select</option>
-      <option [ngValue]="country.id" *ngFor="let country of countryList">
-        {{ country.name }}
-      </option>
+      <option value="1">India</option>
+      <option value="2">USA</option>
+      <option value="3">Russia</option>
     </select>
   </div>
-  <div ngModelGroup="address">
+  <div formGroupName="address">
     <p>
       <Label>City</Label>
-        <input type="text" [(ngModel)]="contact.address.city" name="city" class="border border-black focus:outline-none rounded-md bg-slate-100 py-2 px-5"
+        <input type="text" formControlName="city" name="city" class="border border-black focus:outline-none rounded-md bg-slate-100 py-2 px-5"
         />
       
     </p>
     <p>
       <Label>street</Label>
-        <input type="text"[(ngModel)]="contact.address.street" name="street" class="border border-black focus:outline-none rounded-md bg-slate-100 py-2 px-5"
+        <input type="text" formControlName="street" name="street" class="border border-black focus:outline-none rounded-md bg-slate-100 py-2 px-5"
         />
       
     </p>
     <p>
       <Label>pincode</Label>
-        <input type="text" [(ngModel)]="contact.address.pincode" name="pincode" class="border border-black focus:outline-none rounded-md bg-slate-100 py-2 px-5"
+        <input type="text" formControlName="pincode" name="pincode" class="border border-black focus:outline-none rounded-md bg-slate-100 py-2 px-5"
         />
       
     </p>
   </div>
+
+  
   <!-- submit -->
   <div>
     <button
       type="submit"
       class="bg-green-700 p-2 rounded-lg text-white hover:opacity-95"
-    [disabled]="!contactForm.valid"
-      >
+    >
       Submit
     </button>
   </div>
